@@ -12,14 +12,22 @@ object TestArrays {
     numbers(3) = 100 // replace the 4th array element with 100
     val biggerNumbers = numbers.map(_ * 2) // multiply all numbers by two
 
-    println(numbers(1))
+    ///println(numbers(1))
 
 
     val arr = Array(1, 2, 3)
     val arrReversed = arr.reverse
-    val seqReversed : Seq[Int] = arr.reverse
+    val seqReversed: Seq[Int] = arr.reverse
 
-    println(seqReversed)
+    val newSeq = seqReversed :+ 4
+
+    /// iteration through arrays
+
+    for (elem <- numbers if elem < 100) println(elem)
 
   }
+
+
+  def someFunc() = null
+
 }
