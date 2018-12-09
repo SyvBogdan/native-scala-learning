@@ -21,6 +21,7 @@ object TestArrays {
 
     val newSeq = seqReversed :+ 4
 
+
     /// iteration through arrays
 
     for (elem <- numbers if elem < 100) println(elem)
