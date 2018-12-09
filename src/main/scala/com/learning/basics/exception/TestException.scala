@@ -4,14 +4,14 @@ object TestException {
 
   def main(args: Array[String]): Unit = {
 
-    try{
+    try {
 
       divideNumber(1, 20)
 
-      throw  new RuntimeException("smth else")
+      throw new RuntimeException("smth else")
 
     } catch {
-      case ex: ZeroDivideException  => println(ex.message)
+      case ex: ZeroDivideException => println(ex.message)
       case another => println(s"another exception - ${another.getMessage}")
     }
 
@@ -22,46 +22,50 @@ object TestException {
     println("Catch with is Exception: " + getValueFromCatch(true))
 
 
+    println(divideNumberWithoutEx(0, 20))
 
-    println(divideNumberWithoutEx(0,20))
+
+
+
+
   }
 
 
-  def divideNumber( divider: Int ,int: Int) =
-    if(divider == 0) throw ZeroDivideException("zero dividing rejected")
+  def divideNumber(divider: Int, int: Int) =
+    if (divider == 0) throw ZeroDivideException("zero dividing rejected")
     else int / divider
 
-  def divideNumberWithoutEx( divider: Int ,int: Int) =
+  def divideNumberWithoutEx(divider: Int, int: Int) =
 
     try {
       if (divider == 0) throw ZeroDivideException("zero dividing rejected")
       else int / divider
-    }catch {
-      case _  => throw ZeroDivideException("zero dividing rejected")
+    } catch {
+      case _ => throw ZeroDivideException("zero dividing rejected")
     } finally {
       println("finally")
     }
 
-  def getValueFromFinally(isException:Boolean) = {
+  def getValueFromFinally(isException: Boolean) = {
     var value = 0;
-    try{
+    try {
       getValueFromCatch(isException)
-    }finally {
+    } finally {
       value = 4
     }
     value
   }
 
 
-  def getValueFromCatch(isException:Boolean) = {
+  def getValueFromCatch(isException: Boolean) = {
     var value = 0;
-    try{
+    try {
       value = 1
-      if (isException){
+      if (isException) {
         throw new RuntimeException()
       }
       value = 2
-    }catch{
+    } catch {
       case ex => value = 3
     }
     value
