@@ -30,6 +30,7 @@ object TestClasses {
     type JoinList = (List[String], List[String]) => List[String]
 
     val concat: JoinList = (list1: List[String], list2: List[String]) => list1:::list2
+    val concat2: (List[String], List[String]) => List[String] = (list1: List[String], list2: List[String]) => list1:::list2
 
     val  man1 = new Man(20)
 

@@ -14,6 +14,14 @@ object TestException {
       case ex: ZeroDivideException  => println(ex.message)
       case another => println(s"another exception - ${another.getMessage}")
     }
+
+    println("Finally with no Exception: " + getValueFromFinally(false))
+    println("Finally with is Exception: " + getValueFromFinally(true))
+
+    println("Catch with no Exception: " + getValueFromCatch(false))
+    println("Catch with is Exception: " + getValueFromCatch(true))
+
+
   }
 
 
@@ -21,4 +29,28 @@ object TestException {
     if(divider == 0) throw ZeroDivideException("zero dividing rejected")
     else int / divider
 
+  def getValueFromFinally(isException:Boolean) = {
+    var value = 0;
+    try{
+      getValueFromCatch(isException)
+    }finally {
+      value = 4
+    }
+    value
+  }
+
+
+  def getValueFromCatch(isException:Boolean) = {
+    var value = 0;
+    try{
+      value = 1
+      if (isException){
+        throw new RuntimeException()
+      }
+      value = 2
+    }catch{
+      case ex => value = 3
+    }
+    value
+  }
 }
