@@ -22,12 +22,25 @@ object TestException {
     println("Catch with is Exception: " + getValueFromCatch(true))
 
 
+
+    println(divideNumberWithoutEx(0,20))
   }
 
 
   def divideNumber( divider: Int ,int: Int) =
     if(divider == 0) throw ZeroDivideException("zero dividing rejected")
     else int / divider
+
+  def divideNumberWithoutEx( divider: Int ,int: Int) =
+
+    try {
+      if (divider == 0) throw ZeroDivideException("zero dividing rejected")
+      else int / divider
+    }catch {
+      case _  => throw ZeroDivideException("zero dividing rejected")
+    } finally {
+      println("finally")
+    }
 
   def getValueFromFinally(isException:Boolean) = {
     var value = 0;
