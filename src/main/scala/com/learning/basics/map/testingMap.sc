@@ -14,3 +14,5 @@ val seqReversed: Seq[Int] = arr.reverse
 
 
 val concat = (list1: List[String], list2: List[String]) => List[java.io.Serializable] = list1::list2
+
+val totalRevenueFunc = (incomes: Int*) => incomes.foldLeft(0)((a, b) => a + b)
