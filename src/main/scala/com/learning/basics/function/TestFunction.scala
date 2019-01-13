@@ -124,11 +124,11 @@ object TestFunction {
     val case8 = Case.createNewCase("Named Arguments", 8)
 
     // this works only with def function
-    def  funcTypeParams  (first: Int, second: String) = {
+    def funcTypeParams(first: Int, second: String) = {
 
-      println(s"first(int) - : $first" )
+      println(s"first(int) - : $first")
 
-      println(s"second(String) - : $second" )
+      println(s"second(String) - : $second")
 
     }
 
@@ -148,16 +148,18 @@ object TestFunction {
 
     println(result)
 
-    println(curMultiPart(3){4})
+    println(curMultiPart(3) {
+      4
+    })
 
     case9.endOfCase
 
     val case10 = Case.createNewCase("new Control Structure", 10)
 
-    def printSmth( file : File)(process: OutputStream => Unit ) ={
+    def printSmth(path: Path)(process: OutputStream => Unit) = {
 
       import java.io.FileOutputStream
-      val outputStream = new FileOutputStream(file)
+      val outputStream = new FileOutputStream(path.toFile)
 
       try {
         process(outputStream)
@@ -173,19 +175,61 @@ object TestFunction {
 
     val uri = this.getClass.getClassLoader.getResource("file.txt").toURI
 
-    val file = Paths.get(uri)
+    val path = Paths.get(uri)
     /// constructing DSL example
-    val file1 = file.toFile
 
-    printSmth(file1){ stream =>
+    printSmth(Paths.get(uri)) { stream =>
       stream.write(new Date().toString.getBytes())
       stream.flush()
     }
-
     case10.endOfCase
 
+    val case11 = Case.createNewCase("", 11)
 
+    // example of lazy evaluation with by name parameter
+    var assertionsEnabled = true
 
+    def myAssert(predicate: => Boolean) = {
+      println("main assertation")
+      if (assertionsEnabled && !predicate)
+        throw new AssertionError
+    }
+
+    myAssert({
+      println("calculation")
+      5 > 3
+    })
+    case11.endOfCase
+
+    // where we can use covariant and contervariant params in Function in practice
+
+    class Fruit
+
+    class Apple extends Fruit
+
+    class ToxicApple extends Apple
+
+    // implication that we can accept function with Input that Apple or Fruit ( -T in function)
+    //and  return  Apple or ToxicApple ( +R in function)
+
+    val highOrderFunc = (func: Function1[Apple, Apple]) => func.apply(null)
+
+    // right variant
+    val fruitFun: Fruit => ToxicApple = (apple: Fruit) => new ToxicApple
+
+    highOrderFunc(fruitFun)
+
+    //wrong variant
+    val fruitFun2: ToxicApple => Fruit = (apple: ToxicApple) => new Fruit
+
+    //highOrderFunc(fruitFun2) //compile Failed
 
   }
+
+  class Fruit
+
+  class Apple extends Fruit
+
+  class ToxicApple extends Apple
+
 }

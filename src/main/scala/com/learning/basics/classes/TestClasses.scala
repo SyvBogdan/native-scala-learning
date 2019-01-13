@@ -2,6 +2,8 @@ package com.learning.basics.classes
 
 import java.io
 
+import com.learning.basics.helper.Case
+
 class TestClasses(val digit: Int)
 
 object TestClasses {
@@ -53,6 +55,19 @@ object TestClasses {
 
     val c = if (a > b) a else b //2
 
+
+    val case1 = Case.createNewCase("Test val as immutable val", 1)
+
+    val elem = new CompleteElement
+
+    println(elem.width)
+
+   val arr2 = elem.contents
+
+    arr2(0) = "33333333333333333"
+
+
+    println(elem.width)
   }
 
   def returnOrProcess( boolean: Boolean) =
