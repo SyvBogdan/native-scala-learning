@@ -20,7 +20,7 @@ object App extends Directives {
 
     val password: Array[Char] = "qwerty".toCharArray
 
-    val ks: KeyStore = KeyStore.getInstance("JKS")
+    val ks: KeyStore = KeyStore.getInstance("JKS") // PKCS12
     val keystore: InputStream = getClass.getClassLoader.getResourceAsStream("httpsscala.jks")
 
     require(keystore != null, "Keystore required!")

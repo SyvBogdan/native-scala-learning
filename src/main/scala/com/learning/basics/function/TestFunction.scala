@@ -226,10 +226,4 @@ object TestFunction {
 
   }
 
-  class Fruit
-
-  class Apple extends Fruit
-
-  class ToxicApple extends Apple
-
 }
