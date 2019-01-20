@@ -1,7 +1,7 @@
 package com.learning.basics.traits
 
 //
-class Man extends Developer {
+class Man extends Developer with DynamicTrait {
 
   override lazy val level: String = "Senior"
 

@@ -41,6 +41,8 @@ object TestTraits {
     }
 
     trait  SimpleTrait2  {
+
+      this: SimpleTrait2 =>
       def whoAmI() = println("I am SimpleTrait2")
     }
 
@@ -49,7 +51,54 @@ object TestTraits {
    /* class SimpleClass extends CompoundTrait {
      // override def whoAmI() = println("I am SimpleClass")
     } -- compilation error due to dublication  */
+    case3.endOfCase
 
+    val case4 = Case.createNewCase("self types in  traits", 3)
+
+    trait User {
+      def username: String
+    }
+
+    trait Tweeter {
+      this: User =>  // reassign this
+      def tweet(tweetText: String) = println(s"$username: $tweetText")
+    }
+
+    class VerifiedTweeter(val username_ : String) extends Tweeter with User {  // We mixin User because Tweeter required it
+      def username = s"real $username_"
+    }
+
+    val realBeyoncé = new VerifiedTweeter("Beyoncé")
+    realBeyoncé.tweet("Just spilled my glass of lemonade")
+    ///////////////////////////////////////////////////////////////
+
+    trait ReaderWriter{
+      def read(): String = "data from file"
+      def write(): String = "data written to file"
+    }
+
+    trait ReaderWriterDB extends ReaderWriter{
+      override def read(): String = "data from DB"
+      override def write(): String = "data written to DB"
+    }
+
+    class Service{
+      this: ReaderWriter =>
+      def reading: String = read()
+      def writing : String = write()
+    }
+
+    val servise = new Service with ReaderWriter
+
+    println(servise.reading)
+    println(servise.writing)
+
+    val servise2 = new Service with ReaderWriterDB
+
+    println(servise2.reading)
+    println(servise2.writing)
+
+    case4.endOfCase
 
   }
 }
