@@ -1,12 +1,13 @@
 package com.learning.basics.function
 
-import java.io.{File, OutputStream, PrintWriter}
+import java.io.OutputStream
 import java.nio.file.{Path, Paths}
 import java.util.Date
 
 import com.learning.basics.helper.Case
 
 import scala.io.Source
+import scala.util.Random
 
 object TestFunction {
 
@@ -223,6 +224,49 @@ object TestFunction {
     val fruitFun2: ToxicApple => Fruit = (apple: ToxicApple) => new Fruit
 
     //highOrderFunc(fruitFun2) //compile Failed
+
+    val case12 = Case.createNewCase("", 12)
+
+    val nothing: Int = 1
+
+    val func1 = new Function[Int, Int] {
+
+      override def apply(int: Int): Int = nothing
+    }
+    //  println(func1(4))
+
+    case12.endOfCase
+
+    val case13 = Case.createNewCase("Closure", 13)
+
+    var outerParam: Int = 1
+
+    val closureParamFunc: () => Unit = () =>  {
+
+     val nextInt =  Random.nextInt()
+
+
+      val d = 31
+
+    }
+
+   // println(closureParamFunc())
+
+    outerParam = 3
+
+   // println(closureParamFunc())
+
+    case13.endOfCase
+
+
+    val test: () => Int =  {
+      val r = util.Random.nextInt
+      () => r
+    }
+
+    println(test())
+
+    println(test())
 
   }
 
