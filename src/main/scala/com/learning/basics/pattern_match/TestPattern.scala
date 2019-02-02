@@ -2,7 +2,6 @@ package com.learning.basics.pattern_match
 
 import com.learning.basics.helper.Case
 
-
 object TestPattern {
 
   def main(args: Array[String]): Unit = {
@@ -11,10 +10,9 @@ object TestPattern {
     //  selector match { alternatives ... }
 
     //case 1
-
     val case1 = Case.createNewCase("Simple Pattern mathing", 1)
 
-/*    val shape = new Shape {
+    /*val shape = new Shape {
       override val area: Int = 0
     }*/
 
@@ -28,7 +26,6 @@ object TestPattern {
     case1.endOfCase
 
     //case 2
-
     val case2 = Case.createNewCase("Wild Card Pattern", 2)
 
     val wildCardPattern = (any: Any) => any match {
@@ -43,19 +40,19 @@ object TestPattern {
     val case3 = Case.createNewCase("Constant patterns", 3)
 
     val totalPattern = (any: Any) => any match {
-      case cc: Circle2.type => "Circle2 singleton object"
+      case cc: Circle2 => "Circle2 singleton object"
       case tp: TestPattern.type => "main singleton object"
-      case shape: Circle => s"Circle With area ${shape.area} "
+      case shape: Circle2 => s"Circle With area ${shape.area} "
+      case "dfgdfgdwg" => "string literal"
       case square: Square => s"Square with area ${square.area}  "
       case Nil => "the empty list"
       case _ => "something else"
     }
 
-    println(totalPattern(TestPattern))
+    println(totalPattern(Circle2(2)))
     case3.endOfCase
 
     //case 4
-
     val case4 = Case.createNewCase("Constant patterns", 4)
 
     val variablePattern = (any: Any) =>
@@ -74,7 +71,7 @@ object TestPattern {
 
     val constructorPattern = (any: Shape) =>
       any match {
-        case Rectangle(5, a) => s"This is Rectangle with side length: 5, and default width"
+        case Rectangle(5, a) => s"This is Rectangle with side length: 5, and default width ${a}"
         case Square(a) => s"This is Square with side a: $a"
         case Circle(8) => "This is Circle with radius 8 "
         case somethingElse => "somethingElse"
@@ -141,7 +138,7 @@ object TestPattern {
 
     val variableBindingPattern = (any: Any) =>
       any match {
-        case Rectangle(8, a@_) => s"Rectangle w with first param $a"
+        case rectangle@Rectangle(8, p) => s"Rectangle w with first param $p, rectangle : $rectangle"
         case somethingElse => "somethingElse"
       }
 
@@ -154,7 +151,7 @@ object TestPattern {
 
     val patternGuard = (any: Any) =>
       any match {
-        case Rectangle(x@1, y) if x == y => s"This Rectangle is Square with side $x"
+        case Rectangle(x@1, y) if (x == y) => s"This Rectangle is Square with side $x"
 
         //case somethingElse => "somethingElse"
       }
@@ -165,7 +162,7 @@ object TestPattern {
     //case 11
     val case11 = Case.createNewCase("Sealed classes in pattern and unchecked annotation", 11)
 
-    val sealedPattern = (any: Any @unchecked) =>
+    val sealedPattern = (any: Any@unchecked) =>
       any match {
         case Rectangle(x, y) if x == y => s"This Rectangle is Square with side $x"
         //  case somethingElse => "somethingElse"
@@ -174,6 +171,41 @@ object TestPattern {
     println(sealedPattern(Rectangle(2, 2)))
     case11.endOfCase
 
+
+    //case 12
+    val case12 = Case.createNewCase("Direct target from pattern matching to any ref from current scope", 12)
+
+    val someVal = "123"
+
+    def testValMatch(any: Any) = any match {
+
+      case `someVal` => someVal
+      case _ =>
+    }
+
+    println(testValMatch("123"))
+
+    case12.endOfCase
+
+    //case 13
+    val case13 = Case.createNewCase("list parts matching", 13)
+
+    def matchList(anyList: List[Int]) = anyList match {
+
+      case x :: other=> other.head
+
+    }
+
+    println(matchList(List(1,2,3)))
+
+    def matchAnotherList(anyList: List[Int]) = anyList match {
+
+      case x :: y :: z => z
+
+    }
+
+    println(matchAnotherList(List(1,2)))
+    case13.endOfCase
 
   }
 }
