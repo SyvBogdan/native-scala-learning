@@ -6,11 +6,11 @@ object TestValuesClasses {
 
     // implicit def extendInt(i: Int) = new ExtendedInt(i)
     val n: Int = 1
-
-    n.plus1(2)
+    Nil
+    n plus12345 2
   }
 
-  implicit class ExtendedInt2(val value: Int) extends AnyVal {
-    def plus1(other: Int) = value + other
+  implicit class DDDd(val value: Int)  {
+    def plus12345(other: Int) = value + other
   }
 }

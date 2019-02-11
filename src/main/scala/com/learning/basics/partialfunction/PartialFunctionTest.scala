@@ -85,7 +85,6 @@ object PartialFunctionTest {
 
     val case4 = Case.createNewCase("Test  partial function for summarize", 2)
 
-
     val getFromOracle = (int: Int) => int * 2
 
     val getFromFile = (int: Int) => int * 3
