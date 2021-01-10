@@ -29,7 +29,7 @@ object SessionHttpServer extends App with StrictLogging {
   }
 
   def mySetSession(v: MyScalaSession) = setSession(refreshable, usingCookies, v)
-
+/// my line
   val myRequiredSession = requiredSession(refreshable, usingCookies)
   val myInvalidateSession = invalidateSession(refreshable, usingCookies)
 
