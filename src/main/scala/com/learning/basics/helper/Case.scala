@@ -1,7 +1,7 @@
 package com.learning.basics.helper
 
 trait Case {
-  def endOfCase
+  def endOfCase: Unit
 }
 
 object Case {
@@ -12,7 +12,7 @@ object Case {
     println(header)
     println(makeRelevantLength('*', header))
 
-    def endOfCase {
+    def endOfCase: Unit ={
       val end = "End of Case " + num
       println(makeStarLine('*', header.length / 2 - end.length) + end + makeStarLine('*', header.length / 2))
     }
@@ -25,10 +25,7 @@ object Case {
   private val makeRelevantLength = (char: Char, word: String) => {
     for (s <- word) yield char
   }
-  private val makeStarLine: (Char, Int) => String = (char: Char, quantity: Int) => {
-    val vector = for (i <- 1 to quantity) yield char
-    vector.mkString
-  }
+  private val makeStarLine =  (char: Char, quantity: Int) => (for (i <- 1 to quantity) yield char).mkString
 
 }
 

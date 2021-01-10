@@ -30,7 +30,7 @@ object TestTraits {
       override def showProperty: String = prop
 
     }
-    println(dynamicTraitWithProp.showProperty)
+    println(dynamicTraitWithProp)
 
     case2.endOfCase
 
@@ -46,14 +46,14 @@ object TestTraits {
       def whoAmI() = println("I am SimpleTrait2")
     }
 
-   /* class CompoundTrait extends SimpleTrait with SimpleTrait2 -- compilation error due to dublication */
+    //class CompoundTrait extends SimpleTrait with SimpleTrait2 //-- compilation error due to dublication */
 
    /* class SimpleClass extends CompoundTrait {
      // override def whoAmI() = println("I am SimpleClass")
     } -- compilation error due to dublication  */
     case3.endOfCase
 
-    val case4 = Case.createNewCase("self types in  traits", 3)
+    val case4 = Case.createNewCase("self types in  traits", 4)
 
     trait User {
       def username: String
@@ -99,6 +99,18 @@ object TestTraits {
     println(servise2.writing)
 
     case4.endOfCase
+
+    val case5 = Case.createNewCase("self types in  classes", 5)
+
+    class SubDynamicClass extends DynamicTrait{
+      override def dynamicInvocation(): Unit = println("i am dynamic class")
+    }
+
+    //val selfTypeClass = new SelfTypeClass with SubDynamicClass
+
+    //selfTypeClass.dynamicInvocation()
+
+    case5.endOfCase
 
   }
 }

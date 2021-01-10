@@ -7,6 +7,4 @@ class SimpleClass {
   val testClass = TestClass.createTestClass
 
 
-  testClass.partlyVisibleVar
-
 }

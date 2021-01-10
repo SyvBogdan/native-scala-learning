@@ -12,7 +12,7 @@ object TestException {
 
     } catch {
       case ex: ZeroDivideException => println(ex.message)
-      case another => println(s"another exception - ${another.getMessage}")
+      case another: Throwable => println(s"another exception - ${another.getMessage}")
     }
 
     println("Finally with no Exception: " + getValueFromFinally(false))
@@ -24,9 +24,7 @@ object TestException {
 
     println(divideNumberWithoutEx(0, 20))
 
-
-
-
+    
 
   }
 
@@ -41,7 +39,7 @@ object TestException {
       if (divider == 0) throw ZeroDivideException("zero dividing rejected")
       else int / divider
     } catch {
-      case _ => throw ZeroDivideException("zero dividing rejected")
+      case _: Throwable => throw ZeroDivideException("zero dividing rejected")
     } finally {
       println("finally")
     }
@@ -66,7 +64,7 @@ object TestException {
       }
       value = 2
     } catch {
-      case ex => value = 3
+      case ex: Throwable => value = 3
     }
     value
   }

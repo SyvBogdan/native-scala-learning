@@ -19,7 +19,7 @@ object TestFunction {
     println("(a: Int, b: Int) => a + b")
     println(primaryFunc(1, 2))
 
-    case1 endOfCase
+    case1.endOfCase
 
     val case2 = Case.createNewCase("high order function", 2)
 
@@ -38,7 +38,7 @@ object TestFunction {
 
     println(taxFunc(totalRevenueFunc, List(10, 20, 30), 0.2d))
 
-    case2 endOfCase
+    case2.endOfCase
 
     val case3 = Case.createNewCase("local functions", 3)
 
@@ -166,7 +166,7 @@ object TestFunction {
         process(outputStream)
       } catch {
         case ex: Exception => println(ex)
-        case _ => println("UnhandledException")
+        case _: Throwable => println("UnhandledException")
       }
       finally {
         println("finally")
@@ -241,32 +241,54 @@ object TestFunction {
 
     var outerParam: Int = 1
 
-    val closureParamFunc: () => Unit = () =>  {
+    val closureParamFunc: () => Unit = () => {
 
-     val nextInt =  Random.nextInt()
+      val nextInt = Random.nextInt()
 
 
       val d = 31
 
     }
 
-   // println(closureParamFunc())
+    // println(closureParamFunc())
 
     outerParam = 3
 
-   // println(closureParamFunc())
+    // println(closureParamFunc())
 
     case13.endOfCase
 
 
-    val test: () => Int =  {
+    val test: () => Int = {
       val r = util.Random.nextInt
       () => r
     }
 
+    val test2: (Int => Int) => () => Int = (a: Int => Int) => {
+      val r = util.Random.nextInt
+      () => a(r)
+    }
     println(test())
 
     println(test())
+
+    val case14 = Case.createNewCase("Closure", 14)
+
+    val add1 = (a: Int) => a + 2
+
+    val add2 = (a: Int) => a * 10
+
+    val r: Int => Int = add1 compose  add2
+
+    println(r(1))
+
+    case14.endOfCase
+
+    val x = -1
+
+    val resSwitch: Any = if(x > 0) "Positive!"
+
+    println(resSwitch)
 
   }
 

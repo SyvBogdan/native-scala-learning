@@ -15,20 +15,43 @@ object TestArrays {
     ///println(numbers(1))
 
 
-    val arr = Array(1, 2, 3)
-    val arrReversed = arr.reverse
-    val seqReversed: Seq[Int] = arr.reverse
+    //val arr: Array[Int] = Array(1, 2, 3)
+   // val seqReversed: Seq[Int] = arr.reverse
 
-    val newSeq = seqReversed :+ 4
+    //val newSeq = seqReversed :+ 4
 
 
     /// iteration through arrays
 
     for (elem <- numbers if elem < 100) println(elem)
 
+
+    val template = "User %s is not authorized to create any events in broker %s"
+
+    val broker = "kafka"
+
+    val eventId = 101
+
+//    println(bind(template, broker, eventId))
+
+    val d = null
+
+    println(Some(d))
+
+    println()
+
   }
 
 
   def someFunc() = null
+  val broker = "kafka"
+
+  val eventId = 101
+
+
+  private def bind(template: String, args: Any*): String ={
+    println(args.toArray)
+    template.format(args.toList)
+  }
 
 }

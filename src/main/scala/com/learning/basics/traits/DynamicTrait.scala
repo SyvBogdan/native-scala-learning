@@ -2,6 +2,8 @@ package com.learning.basics.traits
 
 trait DynamicTrait {
 
-  def dynamicInvocation() =  println("i am dynamic trait")
+  val someVariable: Int = 1
+
+  def dynamicInvocation() = println("i am dynamic trait")
 
 }

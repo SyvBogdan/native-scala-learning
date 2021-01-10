@@ -66,11 +66,10 @@ object PartialFunctionTest {
 
     case2.endOfCase
 
-    val case3 = Case.createNewCase("Test  partial function for summarize", 2)
+    val case3 = Case.createNewCase("Test  partial function for summarize", 3)
 
     // general function
     val sum = (a: Int, b: Int, c: Int) => a + b + c
-
 
     val partEvenFunction: PartialFunction[Int, Int] = {
       case input if (input % 2) != 0 => 0
@@ -83,15 +82,17 @@ object PartialFunctionTest {
 
     case3.endOfCase
 
-    val case4 = Case.createNewCase("Test  partial function for summarize", 2)
+    val case4 = Case.createNewCase("Test  partial function for summarize", 4)
 
     val getFromOracle = (int: Int) => int * 2
 
     val getFromFile = (int: Int) => int * 3
 
     val resultFinihed: PartialFunction[Int, String] = {
-      case res if res != null => s"Succefully finished with Result $res"
+      case res if res != null => s"Successfully finished with Result $res"
     }
+
+
 
     val getFromDb: PartialFunction[Int, Int] = {
       case x if x > 0 => getFromOracle(x)
@@ -101,11 +102,29 @@ object PartialFunctionTest {
       case x if x <= 0 => getFromFile(x)
     }
 
-    val getResult: PartialFunction[Int, String] = (getFromDb orElse getFromAnotherSource) andThen resultFinihed
+    val getResult: PartialFunction[Int, String] =
+      (getFromDb orElse getFromAnotherSource) andThen ( d => {
 
-    println(getResult(-3))
+        s"The result was: $d"
+    })
+
+    println(getResult(2))
 
     case4.endOfCase
 
+
+    val case5 = Case.createNewCase("Test  partial function for insufficient result", 5)
+
+    val divide: PartialFunction[Int, Int] = {
+      case d: Int if d != 0 => 42 / d
+      case _ => 0
+    }
+
+
+    println(divide(0))
+    case5.endOfCase
   }
+
+
+
 }

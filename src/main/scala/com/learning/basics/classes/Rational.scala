@@ -44,7 +44,7 @@ class Rational(n: Int, d: Int) {
   def / (i: Int): Rational =
     new Rational(numer, denom * i)
 
-  override def toString = numer + "/" + denom
+  override def toString = s"$numer/$denom"
 
   @tailrec
   private def gcd(a: Int, b: Int): Int =

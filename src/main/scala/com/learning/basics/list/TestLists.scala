@@ -56,19 +56,22 @@ object TestLists {
     println(a.reverse)
 
     // map a function to double the numbers over the list
-    println(a.map { v ⇒
+/*    println(a.map { v ⇒
       v * 2
-    })
+    })*/
 
     // filter any values divisible by 3 in the list
-    println(a.filter { v ⇒
+/*    println(a.filter { v ⇒
       v % 3 == 0
-    })
-
+    })*/
 
     val a1 = List(1, 3, 5, 7)
-    println(a1.reduceLeft(_ + _))
+    println(s"${a1.sum}")
 
 
+    List(1, 2, 3).sum
   }
+
+  class A private (val d: String)
+
 }

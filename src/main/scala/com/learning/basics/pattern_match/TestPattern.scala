@@ -207,5 +207,24 @@ object TestPattern {
     println(matchAnotherList(List(1,2)))
     case13.endOfCase
 
+
+    val case14 = Case.createNewCase("Child pattern matching", 14)
+
+
+
+    def matchChild(any: Any): Unit = any match {
+
+      case parent : Parent  => print( " type of Parent ")
+    }
+
+    matchChild( new Child())
+
+    case14.endOfCase
+
   }
+
+
+  case class Parent()
+
+  class Child() extends Parent
 }
